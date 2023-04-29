@@ -1,10 +1,29 @@
-"""EE 250L Final Project Publisher File: Runs RPi
+"""EE 250L Final Project Publisher File: Runs on RPi
 Run sub.py in a separate terminal on your VM."""
 
-import paho.mqtt.client as mqtt
+import paho.mqtt.client as mqtt # Publisher/MQTT Code
 import time
 from datetime import datetime
-import socket
+import socket   # Publisher/MQTT Code
+import RPi.GPIO as GPIO # Data Collection Init
+
+# HARDWARE INITIALIZATION: 
+    # Import SPI library (for hardware SPI) and MCP3008 library. (Data Collection)
+    import Adafruit_GPIO.SPI as SPI
+    import Adafruit_MCP3008
+    
+    GPIO.setmode(GPIO.BCM) # Use BCM Configuration
+    GPIO.setwarnings(False)
+
+    # Hardware SPI configuration:
+    SPI_PORT   = 0
+    SPI_DEVICE = 0
+    mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+
+    # Set channels as outputs
+    led_pin = 17
+    GPIO.setup(led_pin, GPIO.OUT) # Set LED as an Output; BCM 17
+
 
 """This function (or "callback") will be executed when this client receives 
 a connection acknowledgement packet response from the server. """
@@ -43,24 +62,37 @@ if __name__ == '__main__':
     time.sleep(1)
 
     while True:
-        #maybe change gtrue? but i think this ip address stuff is this 
-        #replace user with your USC username in all subscriptions
-        client.publish("gtrue/ipinfo", f"{ip_address}")
-        print("Publishing ip address")
-        time.sleep(4)
+        # GET SAMPLE OF DATA
+        print("READING DATA....")
+ 
+        GPIO.output(led_pin, GPIO.HIGH) # Turn on LED Before Reading Sound
+        time.sleep(0.5)
+        sound_sum = 0 # Reset sound sum to 0
+        sound_channel = 1 # Sound sensor on channel 0
+        for i in range(50):
+            sound_val = mcp.read_adc(sound_channel) # Read Sound Sensor on Channel 0
+            print("Value: " + str(sound_val))
+            sound_sum = sound_sum + sound_val
+            time.sleep(0.2)
+        sound_avg = sound_sum/50
+        print("Average Value: " + str(sound_avg))
+        GPIO.output(led_pin, GPIO.LOW)
+        print("NOT READING DATA....")
 
-        #get date and time
-        # change this
+        # GET TIME
         from datetime import date;
-        #today = date.today()
         ctime = datetime.now()
         
-        #publish date and time in their own topics
-        #change this
-        #client.publish("gtrue/date", f"{today}")
-        #print("Publishing todays date")
-        #time.sleep(4)
-        
-        client.publish("gtrue/ctime", f"{ctime}")
-        print("Publishing time")
+        # SEND SAMPLE OF DATA
+        time.sleep(15) 
+        #replace user with your USC username in all subscriptions
+        client.publish("gtrue/ipinfo", f"{sound_avg}") #maybe change gtrue? but i think this ip address stuff is this 
+        print("Publishing Reading Data.")
         time.sleep(4)
+        
+        # SEND TIME
+        client.publish("gtrue/ctime", f"{ctime}")
+        print("Publishing Time.")
+        time.sleep(4)
+        
+        
