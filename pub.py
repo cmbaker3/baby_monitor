@@ -52,14 +52,14 @@ if __name__ == '__main__':
         #get date and time
         # change this
         from datetime import date;
-        today = date.today()
+        #today = date.today()
         ctime = datetime.now()
         
         #publish date and time in their own topics
         #change this
-        client.publish("gtrue/date", f"{today}")
-        print("Publishing todays date")
-        time.sleep(4)
+        #client.publish("gtrue/date", f"{today}")
+        #print("Publishing todays date")
+        #time.sleep(4)
         
         client.publish("gtrue/ctime", f"{ctime}")
         print("Publishing time")
