@@ -1,5 +1,5 @@
-"""EE 250L Lab 04 Starter Code
-Run vm_sub.py in a separate terminal on your VM."""
+"""EE 250L Final Project Publisher File: Runs RPi
+Run sub.py in a separate terminal on your VM."""
 
 import paho.mqtt.client as mqtt
 import time
@@ -43,17 +43,20 @@ if __name__ == '__main__':
     time.sleep(1)
 
     while True:
+        #maybe change gtrue? but i think this ip address stuff is this 
         #replace user with your USC username in all subscriptions
         client.publish("gtrue/ipinfo", f"{ip_address}")
         print("Publishing ip address")
         time.sleep(4)
 
-        #get date and time 
+        #get date and time
+        # change this
         from datetime import date;
         today = date.today()
         ctime = datetime.now()
         
         #publish date and time in their own topics
+        #change this
         client.publish("gtrue/date", f"{today}")
         print("Publishing todays date")
         time.sleep(4)
