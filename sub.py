@@ -66,7 +66,11 @@ if __name__ == '__main__':
     client.on_message = on_message
     #attach the on_connect() callback function defined above to the mqtt client
     client.on_connect = on_connect
-
+    
+    #IMPORTANT: THIS CODE MIGHT NEED TO BE ADDED IN HERE
+    # Attach the on_message_from_ipinfo callback to the client
+    #client.message_callback_add("gtrue/ipinfo", on_message_from_ipinfo)
+    
     """Connect using the following hostname, port, and keepalive interval (in 
     seconds). We added "host=", "port=", and "keepalive=" for illustrative 
     purposes. You can omit this in python. For example:
