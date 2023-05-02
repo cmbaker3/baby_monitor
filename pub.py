@@ -84,7 +84,8 @@ if __name__ == '__main__':
         print("Average Value: " + str(sound_avg))
         GPIO.output(led_pin, GPIO.LOW)
         print("NOT READING DATA....")
-        sound_data.extend(sound_readings) # Add the sound readings to the sound_data list
+        client.publish("gtrue/ipinfo", str(sound_avg))  # Publish sound average to broker
+        #sound_data.extend(sound_readings) # Add the sound readings to the sound_data list
     
     # i originally put this here but it would not create the plot on the computer, I 
     #could send plot to computer through terminal and this command
