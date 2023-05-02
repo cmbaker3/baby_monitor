@@ -86,8 +86,12 @@ if __name__ == '__main__':
         print("NOT READING DATA....")
         sound_data.extend(sound_readings) # Add the sound readings to the sound_data list
     
-    plt.plot(np.arange(len(sound_data)), sound_data)
-    plt.title('Baby\'s Noises')
-    plt.xlabel('Time (0.2s intervals)')
-    plt.ylabel('Sound Level')
-    plt.show()
+    # i originally put this here but it would not create the plot on the computer, I 
+    #could send plot to computer through terminal and this command
+    # scp pi@192.168.0.100:/path/to/image.png user@192.168.0.101:/path/to/destination/
+    # if you update the name pi and user and change ip addresses
+    #plt.plot(np.arange(len(sound_data)), sound_data)
+    #plt.title('Baby\'s Noises')
+    #plt.xlabel('Time (0.2s intervals)')
+    #plt.ylabel('Sound Level')
+    #plt.show()
