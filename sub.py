@@ -2,6 +2,8 @@
 Run vm_pub.py in a separate terminal on your VM."""
 
 import paho.mqtt.client as mqtt
+import matplotlib.pyplot as plt
+import numpy as np
 
 """This function (or "callback") will be executed when this client receives 
 a connection acknowledgement packet response from the server. """
@@ -29,10 +31,30 @@ def on_message(client, userdata, msg):
     print("Default callback - topic: " + msg.topic + "   msg: " + str(msg.payload, "utf-8"))
 
 #Custom message callback.
+#def on_message_from_ipinfo(client, userdata, message):
+   #print("Custom callback  - IP Message: "+message.payload.decode())
+#def on_message_from_ctime(client, userdata, message):
+   #print("Custom callback  - Current Time: "+message.payload.decode())
+
+# Store the sound readings
+sound_data = []
+
+# Custom callback for receiving sound data
 def on_message_from_ipinfo(client, userdata, message):
-   print("Custom callback  - IP Message: "+message.payload.decode())
-def on_message_from_ctime(client, userdata, message):
-   print("Custom callback  - Current Time: "+message.payload.decode())
+    sound_val = int(message.payload.decode())
+    sound_data.append(sound_val)
+    
+    # Plot the sound data
+    if len(sound_data) == 50:
+        # Create a time axis for the plot
+        time_axis = np.arange(len(sound_data))
+
+        # Plot the sound data
+        plt.plot(time_axis, sound_data)
+        plt.xlabel('Time (s)')
+        plt.ylabel('Sound Value')
+        plt.title('Baby Monitor Sound Data')
+        plt.show()
 
 
 
