@@ -39,10 +39,22 @@ def on_message(client, userdata, msg):
 # Store the sound readings
 sound_data = []
 
+# Set threshold for crying detection, this is low, might need to be adjusted
+threshold = 100
+
 # Custom callback for receiving sound data
 def on_message_from_ipinfo(client, userdata, message):
     sound_val = int(message.payload.decode())
     sound_data.append(sound_val)
+    
+    # Check if baby is crying
+    if len(sound_data) >= 50:
+        sound_avg = sum(sound_data) / len(sound_data)
+        print("Sound average: " + str(sound_avg))
+        if sound_avg >= threshold:
+            print("Baby is crying!")
+        
+        sound_data.clear()
     
     # Plot the sound data
     if len(sound_data) == 50:
