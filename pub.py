@@ -10,21 +10,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # HARDWARE INITIALIZATION: 
-    # Import SPI library (for hardware SPI) and MCP3008 library. (Data Collection)
-    import Adafruit_GPIO.SPI as SPI
-    import Adafruit_MCP3008
+# Import SPI library (for hardware SPI) and MCP3008 library. (Data Collection)
+import Adafruit_GPIO.SPI as SPI
+import Adafruit_MCP3008
     
-    GPIO.setmode(GPIO.BCM) # Use BCM Configuration
-    GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM) # Use BCM Configuration
+GPIO.setwarnings(False)
 
-    # Hardware SPI configuration:
-    SPI_PORT   = 0
-    SPI_DEVICE = 0
-    mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+# Hardware SPI configuration:
+SPI_PORT   = 0
+SPI_DEVICE = 0
+mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-    # Set channels as outputs
-    led_pin = 17
-    GPIO.setup(led_pin, GPIO.OUT) # Set LED as an Output; BCM 17
+# Set channels as outputs
+led_pin = 17
+GPIO.setup(led_pin, GPIO.OUT) # Set LED as an Output; BCM 17
 
 
 """This function (or "callback") will be executed when this client receives 
