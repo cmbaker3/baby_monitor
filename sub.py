@@ -57,7 +57,7 @@ def on_message_from_ipinfo(client, userdata, message):
         print("Baby is crying!")
     
     # Plot the sound data
-    if len(sound_data) == 5:
+    if len(sound_data) == 20:
         # Create a time axis for the plot
         time_axis = np.arange(len(sound_data))
         
