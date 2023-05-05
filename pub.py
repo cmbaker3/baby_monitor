@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 import socket   # Publisher/MQTT Code
 import RPi.GPIO as GPIO # Data Collection Init
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 
 # HARDWARE INITIALIZATION: 
