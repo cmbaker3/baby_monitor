@@ -44,6 +44,9 @@ threshold = 100
 
 # Custom callback for receiving sound data
 def on_message_from_ipinfo(client, userdata, message):
+    print("Average Value: " + userdata)
+    print("Average Value: " + message)
+    print("Average Value: " + client)
     sound_val = int(message.payload.decode())
     sound_data.append(sound_val)
     
