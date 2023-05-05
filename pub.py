@@ -85,6 +85,7 @@ if __name__ == '__main__':
         GPIO.output(led_pin, GPIO.LOW)
         print("NOT READING DATA....")
         client.publish("gtrue/ipinfo", str(sound_avg))  # Publish sound average to broker
+        time.sleep(10)
         #sound_data.extend(sound_readings) # Add the sound readings to the sound_data list
     
     # i originally put this here but it would not create the plot on the computer, I 
