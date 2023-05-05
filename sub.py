@@ -41,6 +41,7 @@ def on_message(client, userdata, msg):
 
 # Store the sound readings
 sound_data = []
+sound_data_filtered = []
 
 # Set threshold for crying detection, this is low, might need to be adjusted
 threshold = 100
@@ -60,11 +61,10 @@ def on_message_from_ipinfo(client, userdata, message):
         # Create a time axis for the plot
         time_axis = np.arange(len(sound_data))
         
-        sound_data_filtered = []
         # Filter Sound Data
-        for i in range(20):
+        for i in range(5):
             if sound_data[i] > 100:
-                sound_data_filtered.append(sound_val[i])
+                sound_data_filtered.append(sound_data[i])
                 
         # Plot the sound data
         plt.plot(time_axis, sound_data_filtered)
