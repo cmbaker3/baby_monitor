@@ -44,23 +44,16 @@ threshold = 100
 
 # Custom callback for receiving sound data
 def on_message_from_ipinfo(client, userdata, message):
-    print("Average Value: " + message.payload.decode()) # str(int(userdata)))
+    print("Average Value: " + message.payload.decode())
     # print("Average Value: " + message)
     # print("Average Value: " + client)
     sound_val = message.payload.decode()
     sound_data.append(sound_val)
-    
-    # Check if baby is crying
-    if len(sound_data) >= 50:
-        sound_avg = sum(sound_data) / len(sound_data)
-        print("Sound average: " + str(sound_avg))
-        if sound_avg >= threshold:
-            print("Baby is crying!")
-        
-        sound_data.clear()
+    if sound_val >= threshold:
+        print("Baby is crying!")
     
     # Plot the sound data
-    if len(sound_data) == 50:
+    if len(sound_data) == 20:
         # Create a time axis for the plot
         time_axis = np.arange(len(sound_data))
 
