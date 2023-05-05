@@ -47,7 +47,7 @@ def on_message_from_ipinfo(client, userdata, message):
     print("Average Value: " + message.payload.decode())
     # print("Average Value: " + message)
     # print("Average Value: " + client)
-    sound_val = int(message.payload.decode())
+    sound_val = int(float(message.payload.decode()))
     sound_data.append(sound_val)
     if sound_val >= threshold:
         print("Baby is crying!")
