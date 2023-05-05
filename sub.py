@@ -59,27 +59,19 @@ def on_message_from_ipinfo(client, userdata, message):
     if len(sound_data) == 20:
         # Create a time axis for the plot
         time_axis = np.arange(len(sound_data))
-
+        
+        sound_data_filtered = []
+        # Filter Sound Data
+        for i in range(20):
+            if(sound_data[i] > 100) 
+                sound_data_filtered.append(sound_val[i])
+                
         # Plot the sound data
-        plt.plot(time_axis, sound_data)
+        plt.plot(time_axis, sound_data_filtered)
         plt.xlabel('Time (s)')
         plt.ylabel('Sound Value')
         plt.title('Baby Monitor Sound Data')
         plt.show()
-        
-        # Signal Processing: Applying a Fourier Transform
-        FFT =np.fft.fft(sound_data)
-        new_N=int(len(FFT)/2) 
-        f_nat=1
-        new_X = np.linspace(10**-12, f_nat/2, new_N, endpoint=True)
-        new_Xph=1.0/(new_X)
-        FFT_abs=np.abs(FFT)
-        plt.plot(new_Xph,2*FFT_abs[0:int(len(FFT)/2.)]/len(new_Xph),color='black')
-        plt.xlabel('Period ($h$)',fontsize=20)
-        plt.ylabel('Amplitude',fontsize=20)
-        plt.title('(Fast) Fourier Transform Method Algorithm',fontsize=20)
-        plt.grid(True)
-        plt.xlim(0,200)
 
 
 if __name__ == '__main__':
