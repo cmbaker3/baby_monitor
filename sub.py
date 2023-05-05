@@ -63,7 +63,7 @@ def on_message_from_ipinfo(client, userdata, message):
         sound_data_filtered = []
         # Filter Sound Data
         for i in range(20):
-            if(sound_data[i] > 100) 
+            if sound_data[i] > 100:
                 sound_data_filtered.append(sound_val[i])
                 
         # Plot the sound data
